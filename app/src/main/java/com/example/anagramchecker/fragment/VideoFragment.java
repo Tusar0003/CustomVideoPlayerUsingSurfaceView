@@ -31,7 +31,6 @@ import java.util.ArrayList;
 public class VideoFragment extends Fragment implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener,
         SeekBar.OnSeekBarChangeListener, MainActivity.OnCallBack {
 
-    private View mView;
     private static VideoFragment mVideoFragment;
 
     String demoVideoPath;
@@ -60,7 +59,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_video, container, false);
+        View view = inflater.inflate(R.layout.fragment_video, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         mVideoFragment = this;
@@ -70,16 +69,16 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
             demoVideoPath = bundle.getString("Path");
         }
 
-        surfaceView = mView.findViewById(R.id.surfaceView);
-        backPressedImageView = mView.findViewById(R.id.backPressed);
-        playVideoImageView = mView.findViewById(R.id.playVideo);
-        videoName = mView.findViewById(R.id.videoName);
-        startTimeTextView = mView.findViewById(R.id.startTime);
-        videoSeekBar = mView.findViewById(R.id.videoSeekBar);
-        endTimeTextView = mView.findViewById(R.id.endTime);
-        audioTrack = mView.findViewById(R.id.audioTrack);
-        fastFrowardImageView = mView.findViewById(R.id.fastForward);
-        fastRewindImageView = mView.findViewById(R.id.fastRewind);
+        surfaceView = view.findViewById(R.id.surfaceView);
+        backPressedImageView = view.findViewById(R.id.backPressed);
+        playVideoImageView = view.findViewById(R.id.playVideo);
+        videoName = view.findViewById(R.id.videoName);
+        startTimeTextView = view.findViewById(R.id.startTime);
+        videoSeekBar = view.findViewById(R.id.videoSeekBar);
+        endTimeTextView = view.findViewById(R.id.endTime);
+        audioTrack = view.findViewById(R.id.audioTrack);
+        fastFrowardImageView = view.findViewById(R.id.fastForward);
+        fastRewindImageView = view.findViewById(R.id.fastRewind);
 
         mediaPlayer = new MediaPlayer();
 
@@ -137,7 +136,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
 
         setHandler();
 
-        return mView;
+        return view;
     }
 
 //    @Override
@@ -200,18 +199,6 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
                     endTimeTextView.setText("-" + convertIntoTime(mediaPlayer.getDuration() - currentVideoDuration));
                 }
                 break;
-//            case R.id.fastRewind:
-//                mediaPlayer.seekTo(progress);
-//                int currentVideoDuration = mediaPlayer.getCurrentPosition();
-//                startTimeTextView.setText("" + convertIntoTime(currentVideoDuration));
-//                endTimeTextView.setText("-" + convertIntoTime(mediaPlayer.getDuration() - currentVideoDuration));
-//                break;
-//            case R.id.fastForward:
-//                mediaPlayer.seekTo(progress);
-//                currentVideoDuration = mediaPlayer.getCurrentPosition();
-//                startTimeTextView.setText("" + convertIntoTime(currentVideoDuration));
-//                endTimeTextView.setText("-" + convertIntoTime(mediaPlayer.getDuration() - currentVideoDuration));
-//                break;
         }
     }
 
