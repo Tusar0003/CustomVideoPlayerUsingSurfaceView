@@ -94,7 +94,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
         backPressedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                getActivity().onBackPressed();
             }
         });
 
@@ -130,7 +130,9 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
         fastFrowardImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mediaPlayer.seekTo((mediaPlayer.getCurrentPosition() + 5000));
+                if (mediaPlayer.getCurrentPosition() + 5000 < mediaPlayer.getDuration()) {
+                    mediaPlayer.seekTo((mediaPlayer.getCurrentPosition() + 5000));
+                }
             }
         });
 
@@ -199,6 +201,10 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback, M
                     endTimeTextView.setText("-" + convertIntoTime(mediaPlayer.getDuration() - currentVideoDuration));
                 }
                 break;
+        }
+
+        if (progress == mediaPlayer.getDuration()) {
+            playVideoImageView.setImageResource(R.drawable.ic_action_play);
         }
     }
 
